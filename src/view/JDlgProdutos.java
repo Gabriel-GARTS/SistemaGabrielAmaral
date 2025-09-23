@@ -11,63 +11,21 @@ package view;
 
 
 import javax.swing.JOptionPane;
+import tools.Util;
 public class JDlgProdutos extends javax.swing.JDialog {
     private boolean pesquisado = false;
-    boolean incluir = false;
     /**
      * Creates new form JDlgProdutos
      */
     public JDlgProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Produtos");
+        setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
-        
-        jTxtCodigo.setEnabled(false);
-        jTxtNome.setEnabled(false);
-        jTxtDescricao.setEnabled(false);
-        jTxtPreco.setEnabled(false);
-        jTxtMaterial.setEnabled(false);
-        jTxtMarca.setEnabled(false);
-        jChbAtivo.setEnabled(false);
-       
-        
-        jBtnConfirmar.setEnabled(false);
-        jBtnCancelar.setEnabled(false);
-          
-
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtDescricao,
+                jTxtPreco, jTxtMarca, jTxtMaterial,
+                jChbAtivo, jBtnConfirmar, jBtnCancelar);
     }
-    
-    private void Habilitar(boolean valor) {
-    jBtnIncluir.setEnabled(!valor);
-    jBtnAlterar.setEnabled(!valor);
-    jBtnConfirmar.setEnabled(valor);
-    jBtnConfirmar.setEnabled(valor);
-    jBtnCancelar.setEnabled(valor);
-    jBtnPesquisar.setEnabled(!valor);
-    jBtnExcluir.setEnabled(!valor);
-    
-     jTxtCodigo.setEnabled(valor);
-        jTxtNome.setEnabled(valor);
-        jTxtDescricao.setEnabled(valor);
-        jTxtPreco.setEnabled(valor);
-        jTxtMaterial.setEnabled(valor);
-        jTxtMarca.setEnabled(valor);
-        jChbAtivo.setEnabled(valor);
-               
-      
-    }
-    
-    private void LimparCampos() {
-    jTxtCodigo.setText("");
-    jTxtNome.setText("");
-    jTxtPreco.setText("");
-    jTxtDescricao.setText("");
-    jTxtMarca.setText("");
-    jTxtMaterial.setText("");                 
-    jChbAtivo.setSelected(false);        
-    }
-    
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -252,9 +210,9 @@ public class JDlgProdutos extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        Habilitar(true);
-        LimparCampos();
-        incluir = true;
+        Util.habilitar(true ,jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo , jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
@@ -262,24 +220,26 @@ public class JDlgProdutos extends javax.swing.JDialog {
           if (!pesquisado) {
         JOptionPane.showMessageDialog(this, "É necessário pesquisar um produto antes de alterar.");
         return;}
-        Habilitar(true);
+        Util.habilitar(true ,jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo , jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         jTxtCodigo.setEnabled(false);
         jTxtNome.grabFocus();
         pesquisado = false;
-        incluir = false;
         
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        Habilitar(false);
-        LimparCampos();
+        Util.habilitar(false ,jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo , jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        Habilitar(false);
-        LimparCampos();
+        Util.habilitar(false ,jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo , jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -290,9 +250,8 @@ public class JDlgProdutos extends javax.swing.JDialog {
     }
         int resp = JOptionPane.showConfirmDialog(null, "Confirma Exclusão ?");
         if (resp == JOptionPane.YES_OPTION) {
-            Habilitar(false);
-                    
-            LimparCampos();
+        Util.habilitar(false ,jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo , jBtnConfirmar, jBtnCancelar);
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo);
         }
         
     }//GEN-LAST:event_jBtnExcluirActionPerformed

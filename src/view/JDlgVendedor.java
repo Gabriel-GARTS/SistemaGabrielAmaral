@@ -4,85 +4,30 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import tools.Util;
+
 /**
  *
  * @author ACER
  */
 
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
+
 public class JDlgVendedor extends javax.swing.JDialog {
 private boolean pesquisado = false;
-boolean incluir = false;
-private MaskFormatter mascaraCpf;
+
+
     /**
      * Creates new form Vendedor
      */
     public JDlgVendedor(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+       super(parent, modal);
         initComponents();
-        setTitle("Vendedor");
+        setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
-        
-        try {
-        mascaraCpf = new MaskFormatter("###.###.###-##");
-        
-        jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(mascaraCpf));
-    } catch (ParseException ex) {
-        Logger.getLogger(JDlgVendedor.class.getName()).log(Level.SEVERE, null, ex);
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtEmail,
+               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
     }
-        
-        jTxtCodigo.setEnabled(false);
-        jTxtNome.setEnabled(false);
-        jCboTurno.setEnabled(false);
-        jTxtSalario.setEnabled(false);
-        jTxtEmail.setEnabled(false);        
-        jTxtTelefone.setEnabled(false);
-        jFmtCpf.setEnabled(false);
-        
-        
-        
-        jBtnConfirmar.setEnabled(false);
-        jBtnCancelar.setEnabled(false);
-    }
-    
-    private void Habilitar(boolean valor) {
-    jBtnIncluir.setEnabled(!valor);
-    jBtnAlterar.setEnabled(!valor);
-    jBtnConfirmar.setEnabled(valor);
-    jBtnConfirmar.setEnabled(valor);
-    jBtnCancelar.setEnabled(valor);
-    jBtnPesquisar.setEnabled(!valor);
-    jBtnExcluir.setEnabled(!valor);
-    
-        jTxtCodigo.setEnabled(valor);
-        jTxtNome.setEnabled(valor);
-        jTxtSalario.setEnabled(valor);
-        jTxtEmail.setEnabled(valor);
-        jTxtTelefone.setEnabled(valor);
-        jCboTurno.setEnabled(valor);
-        
-        jFmtCpf.setEnabled(valor);
-        
-        
-
-        
-    }
-    
-     private void LimparCampos() {
-    jTxtCodigo.setText("");
-    jTxtNome.setText("");
-    jTxtSalario.setText("");
-    jTxtEmail.setText("");
-    jCboTurno.setSelectedIndex(0);       
-    jTxtTelefone.setText("");
-    jFmtCpf.setText("");
-   
-}
     
 
     /**
@@ -279,9 +224,11 @@ private MaskFormatter mascaraCpf;
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        Habilitar(true);
-        LimparCampos();
-        incluir = true;
+        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtEmail,
+               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtEmail,
+               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
@@ -289,24 +236,31 @@ private MaskFormatter mascaraCpf;
          if (!pesquisado) {
         JOptionPane.showMessageDialog(this, "É necessário pesquisar um Vendedor antes de alterar.");
         return;}
-        Habilitar(true);
+        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtEmail,
+               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
         jTxtCodigo.setEnabled(false);
         jTxtNome.grabFocus();
         pesquisado = false;
-        incluir = false;
+        
         
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        Habilitar(false);
-        LimparCampos();
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtEmail,
+               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtEmail,
+               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        Habilitar(false);
-        LimparCampos();
+         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtEmail,
+               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
+         Util.habilitar(true , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtEmail,
+               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -316,8 +270,10 @@ private MaskFormatter mascaraCpf;
         return;}
         int resp = JOptionPane.showConfirmDialog(null, "Confirma Exclusão?");
     if (resp == JOptionPane.YES_OPTION) {
-        Habilitar(false);
-        LimparCampos();
+         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtEmail,
+               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtEmail,
+               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario);
         pesquisado = false;
     }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
