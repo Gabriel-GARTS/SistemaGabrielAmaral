@@ -23,7 +23,7 @@ private boolean pesquisado = false;
     public JDlgVendedor(java.awt.Frame parent, boolean modal) {
        super(parent, modal);
         initComponents();
-        setTitle("Cadastro de Usuários");
+        setTitle("Cadastro de Vendedor");
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtEmail,
                jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);

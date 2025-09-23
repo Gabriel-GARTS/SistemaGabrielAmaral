@@ -25,7 +25,7 @@ public class JDlgClientes extends javax.swing.JDialog {
         
        super(parent, modal);
         initComponents();
-        setTitle("Cadastro de Usuários");
+        setTitle("Cadastro de Clientes");
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtEmail,
                jTxtTelefone,jFmtCpf, jFmtDataNascimento,jCboGenero, jTxtEndereco, jTxtCidade, jTxtEstado,jTxtCep,jTxtProfissao,jCboTrabalhoFormal,jChbAtivo,jFmtDataCadastro, jBtnConfirmar, jBtnCancelar);
