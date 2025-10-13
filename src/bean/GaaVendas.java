@@ -4,15 +4,14 @@ package bean;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,13 +28,13 @@ public class GaaVendas  implements java.io.Serializable {
 
      private int gaaIdVendas;
      private GaaClientes gaaClientes;
-     private GaaUsuarios gaaUsuarios;
+     private GaaVendedor gaaVendedor;
      private Date gaaDataVenda;
      private BigDecimal gaaTotal;
      private String gaaStatus;
      private String gaaMetodoPagamento;
      private Date gaaDataPagamento;
-     private Set gaaVendasProdutoses = new HashSet(0);
+  
 
     public GaaVendas() {
     }
@@ -47,16 +46,16 @@ public class GaaVendas  implements java.io.Serializable {
         this.gaaStatus = gaaStatus;
         this.gaaMetodoPagamento = gaaMetodoPagamento;
     }
-    public GaaVendas(int gaaIdVendas, GaaClientes gaaClientes, GaaUsuarios gaaUsuarios, Date gaaDataVenda, BigDecimal gaaTotal, String gaaStatus, String gaaMetodoPagamento, Date gaaDataPagamento, Set gaaVendasProdutoses) {
+    public GaaVendas(int gaaIdVendas, GaaClientes gaaClientes, GaaVendedor gaaVendedor, Date gaaDataVenda, BigDecimal gaaTotal, String gaaStatus, String gaaMetodoPagamento, Date gaaDataPagamento) {
        this.gaaIdVendas = gaaIdVendas;
        this.gaaClientes = gaaClientes;
-       this.gaaUsuarios = gaaUsuarios;
+       this.gaaVendedor = gaaVendedor;
        this.gaaDataVenda = gaaDataVenda;
        this.gaaTotal = gaaTotal;
        this.gaaStatus = gaaStatus;
        this.gaaMetodoPagamento = gaaMetodoPagamento;
        this.gaaDataPagamento = gaaDataPagamento;
-       this.gaaVendasProdutoses = gaaVendasProdutoses;
+       
     }
    
      @Id 
@@ -83,12 +82,12 @@ public class GaaVendas  implements java.io.Serializable {
 
 @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="gaa_idVendedor")
-    public GaaUsuarios getGaaUsuarios() {
-        return this.gaaUsuarios;
+    public GaaVendedor getGaaVendedor() {
+        return this.gaaVendedor;
     }
     
     public void setGaaUsuarios(GaaUsuarios gaaUsuarios) {
-        this.gaaUsuarios = gaaUsuarios;
+        this.gaaVendedor = gaaVendedor;
     }
 
     @Temporal(TemporalType.DATE)
@@ -141,14 +140,6 @@ public class GaaVendas  implements java.io.Serializable {
         this.gaaDataPagamento = gaaDataPagamento;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="gaaVendas")
-    public Set getGaaVendasProdutoses() {
-        return this.gaaVendasProdutoses;
-    }
-    
-    public void setGaaVendasProdutoses(Set gaaVendasProdutoses) {
-        this.gaaVendasProdutoses = gaaVendasProdutoses;
-    }
 
 
 

@@ -12,7 +12,7 @@ import org.hibernate.criterion.Restrictions;
 
 /**
  *
- * @author u09240620109
+ * @author u05594757139
  */
 public class ClientesDAO extends AbstractDAO{
 
