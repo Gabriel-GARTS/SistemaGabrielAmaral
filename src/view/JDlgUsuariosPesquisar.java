@@ -5,9 +5,14 @@
 package view;
 
 
+import view.Controllers.ControllerUsuarios;
+import bean.GaaUsuarios;
+import dao.UsuariosDAO;
+import java.util.List;
+
 /**
  *
- * @author marcos
+ * @author ACER
  */
 public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
 
@@ -16,18 +21,25 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
+    private JDlgUsuarios jDlgUsuarios;
+    ControllerUsuarios controllerUsuarios;
+    
     public JDlgUsuariosPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();        
+        initComponents();
         setLocationRelativeTo(null);
-        
-    }
-    
-//    public void setJDlgUsuarios(JDlgUsuarios jDlgUsuarios){
-    public void setTelaPai(JDlgUsuarios jDlgUsuarios){
-       
+        setTitle("Pesquisar Usuários");
+        controllerUsuarios = new ControllerUsuarios();
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        List lista = (List) usuariosDAO.listAll();
+        controllerUsuarios.setList(lista);
+        jTable1.setModel(controllerUsuarios);
     }
 
+    public void setTelaAnterior( JDlgUsuarios jDlgUsuarios) {
+        this.jDlgUsuarios = jDlgUsuarios;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,7 +68,7 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jBtnOk.setText("ok");
+        jBtnOk.setText("OK");
         jBtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnOkActionPerformed(evt);
@@ -68,21 +80,22 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(309, 309, 309)
-                        .addComponent(jBtnOk))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jBtnOk)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBtnOk))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(jBtnOk)
+                .addContainerGap())
         );
 
         pack();
@@ -90,8 +103,10 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-       
-        setVisible(false);
+        int linsel = jTable1.getSelectedRow();
+        GaaUsuarios usuarios =  (GaaUsuarios) controllerUsuarios.getBean( jTable1.getSelectedRow() );
+        jDlgUsuarios.beanView(usuarios);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**
@@ -119,6 +134,20 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JDlgUsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

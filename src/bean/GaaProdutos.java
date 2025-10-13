@@ -3,13 +3,13 @@ package bean;
 
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 
 /**
@@ -29,22 +29,15 @@ public class GaaProdutos  implements java.io.Serializable {
      private String gaaMarca;
      private String gaaMaterial;
      private String gaaAtivo;
-     private Set gaaVendasProdutoses = new HashSet(0);
+    
+
 
     public GaaProdutos() {
     }
 
 	
+    
     public GaaProdutos(int gaaIdProdutos, String gaaNome, String gaaDescricao, BigDecimal gaaPreco, String gaaMarca, String gaaMaterial, String gaaAtivo) {
-        this.gaaIdProdutos = gaaIdProdutos;
-        this.gaaNome = gaaNome;
-        this.gaaDescricao = gaaDescricao;
-        this.gaaPreco = gaaPreco;
-        this.gaaMarca = gaaMarca;
-        this.gaaMaterial = gaaMaterial;
-        this.gaaAtivo = gaaAtivo;
-    }
-    public GaaProdutos(int gaaIdProdutos, String gaaNome, String gaaDescricao, BigDecimal gaaPreco, String gaaMarca, String gaaMaterial, String gaaAtivo, Set gaaVendasProdutoses) {
        this.gaaIdProdutos = gaaIdProdutos;
        this.gaaNome = gaaNome;
        this.gaaDescricao = gaaDescricao;
@@ -52,8 +45,9 @@ public class GaaProdutos  implements java.io.Serializable {
        this.gaaMarca = gaaMarca;
        this.gaaMaterial = gaaMaterial;
        this.gaaAtivo = gaaAtivo;
-       this.gaaVendasProdutoses = gaaVendasProdutoses;
+     
     }
+    
    
      @Id 
 
@@ -127,14 +121,7 @@ public class GaaProdutos  implements java.io.Serializable {
         this.gaaAtivo = gaaAtivo;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="gaaProdutos")
-    public Set getGaaVendasProdutoses() {
-        return this.gaaVendasProdutoses;
-    }
-    
-    public void setGaaVendasProdutoses(Set gaaVendasProdutoses) {
-        this.gaaVendasProdutoses = gaaVendasProdutoses;
-    }
+
 
 
 

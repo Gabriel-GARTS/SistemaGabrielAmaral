@@ -8,6 +8,7 @@ package view;
  *
  * @author ACER
  */
+import view.Controllers.ControllerVendasProdutos;
 import bean.GaaVendas;
 import dao.VendasDAO;
 import java.text.ParseException;

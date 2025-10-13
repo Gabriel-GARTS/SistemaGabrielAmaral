@@ -3,13 +3,12 @@ package bean;
 
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,7 +38,7 @@ public class GaaClientes  implements java.io.Serializable {
      private String gaaProfissao;
      private String gaaAtivo;
      private Date gaaDataCadastro;
-     private Set gaaVendases = new HashSet(0);
+    
 
     public GaaClientes() {
     }
@@ -60,7 +59,7 @@ public class GaaClientes  implements java.io.Serializable {
         this.gaaProfissao = gaaProfissao;
         this.gaaAtivo = gaaAtivo;
     }
-    public GaaClientes(int gaaIdClientes, String gaaNome, String gaaEmail, String gaaTelefone, String gaaEndereco, String gaaCidade, String gaaEstado, String gaaCep, String gaaCpf, Date gaaDataNascimento, String gaaGenero, String gaaTrabalhoFormal, String gaaProfissao, String gaaAtivo, Date gaaDataCadastro, Set gaaVendases) {
+    public GaaClientes(int gaaIdClientes, String gaaNome, String gaaEmail, String gaaTelefone, String gaaEndereco, String gaaCidade, String gaaEstado, String gaaCep, String gaaCpf, Date gaaDataNascimento, String gaaGenero, String gaaTrabalhoFormal, String gaaProfissao, String gaaAtivo, Date gaaDataCadastro) {
        this.gaaIdClientes = gaaIdClientes;
        this.gaaNome = gaaNome;
        this.gaaEmail = gaaEmail;
@@ -76,7 +75,7 @@ public class GaaClientes  implements java.io.Serializable {
        this.gaaProfissao = gaaProfissao;
        this.gaaAtivo = gaaAtivo;
        this.gaaDataCadastro = gaaDataCadastro;
-       this.gaaVendases = gaaVendases;
+      
     }
    
      @Id 
@@ -231,14 +230,6 @@ public class GaaClientes  implements java.io.Serializable {
         this.gaaDataCadastro = gaaDataCadastro;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="gaaClientes")
-    public Set getGaaVendases() {
-        return this.gaaVendases;
-    }
-    
-    public void setGaaVendases(Set gaaVendases) {
-        this.gaaVendases = gaaVendases;
-    }
 
 
 

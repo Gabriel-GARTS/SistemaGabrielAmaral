@@ -5,6 +5,7 @@
 package view;
 
 
+import view.Controllers.ControllerVendas;
 import bean.GaaVendas;
 import dao.VendasDAO;
 import java.util.List;

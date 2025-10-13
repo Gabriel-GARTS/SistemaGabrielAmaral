@@ -3,13 +3,13 @@ package bean;
 
 
 import java.util.Date;
-import java.util.HashSet;
+
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,7 +32,7 @@ public class GaaUsuarios  implements java.io.Serializable {
      private String gaaSenha;
      private int gaaNivel;
      private String gaaAtivo;
-     private Set gaaVendases = new HashSet(0);
+     
 
     public GaaUsuarios() {
     }
@@ -47,7 +47,7 @@ public class GaaUsuarios  implements java.io.Serializable {
         this.gaaNivel = gaaNivel;
         this.gaaAtivo = gaaAtivo;
     }
-    public GaaUsuarios(int gaaIdusuarios, String gaaNome, String gaaApelido, String gaaCpf, Date gaaDataNascimento, String gaaSenha, int gaaNivel, String gaaAtivo, Set gaaVendases) {
+    public GaaUsuarios(int gaaIdusuarios, String gaaNome, String gaaApelido, String gaaCpf, Date gaaDataNascimento, String gaaSenha, int gaaNivel, String gaaAtivo) {
        this.gaaIdusuarios = gaaIdusuarios;
        this.gaaNome = gaaNome;
        this.gaaApelido = gaaApelido;
@@ -56,7 +56,7 @@ public class GaaUsuarios  implements java.io.Serializable {
        this.gaaSenha = gaaSenha;
        this.gaaNivel = gaaNivel;
        this.gaaAtivo = gaaAtivo;
-       this.gaaVendases = gaaVendases;
+       
     }
    
      @Id 
@@ -141,14 +141,6 @@ public class GaaUsuarios  implements java.io.Serializable {
         this.gaaAtivo = gaaAtivo;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="gaaUsuarios")
-    public Set getGaaVendases() {
-        return this.gaaVendases;
-    }
-    
-    public void setGaaVendases(Set gaaVendases) {
-        this.gaaVendases = gaaVendases;
-    }
 
 
 

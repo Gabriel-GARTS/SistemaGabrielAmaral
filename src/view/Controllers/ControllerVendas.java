@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package view;
-
-import bean.GaaProdutos;
+package view.Controllers;
+import bean.GaaVendas;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 /**
  *
  * @author ACER
  */
-public class ControllerProdutos extends AbstractTableModel{
-private List lista;
+public class ControllerVendas extends AbstractTableModel{
+
+    private List lista;
 
     public void setList(List lista) {
         this.lista = lista;
@@ -34,18 +34,18 @@ private List lista;
     
      @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        GaaProdutos produtos = (GaaProdutos) lista.get(rowIndex);
+        GaaVendas vendas = (GaaVendas) lista.get(rowIndex);
         if (columnIndex == 0) {
-            return produtos.getGaaIdProdutos();
+            return vendas.getGaaIdVendas();
         }
         if (columnIndex == 1) {
-            return produtos.getGaaNome();
+            return vendas.getGaaClientes();
         }
         if (columnIndex == 2) {
-            return produtos.getGaaPreco();
+            return vendas.getGaaVendedor();
         }
         if (columnIndex == 3) {
-            return produtos.getGaaAtivo();
+            return vendas.getGaaTotal();
         }
         return "";
     }
@@ -53,16 +53,16 @@ private List lista;
     @Override
     public String getColumnName(int column) {
         if (column == 0) {
-            return "Código";
+            return "Código Venda";
         }
         if (column == 1) {
-            return "Nome";
+            return "Código Cliente";
         }
         if (column == 2) {
-            return "Preco";
+            return "Código Vendedor";
         }
         if (column == 3) {
-            return "Disponivel";
+            return "Total";
         }
         return "";
     }

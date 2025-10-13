@@ -2,18 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package view;
+package view.Controllers;
 
-import bean.GaaVendedor;
+import bean.GaaUsuarios;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+
 /**
  *
  * @author ACER
  */
-public class ControllerVendedor extends AbstractTableModel{
+public class ControllerUsuarios extends AbstractTableModel{
 
-    private List lista;
+   private List lista;
 
     public void setList(List lista) {
         this.lista = lista;
@@ -35,18 +36,18 @@ public class ControllerVendedor extends AbstractTableModel{
     
      @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        GaaVendedor vendedor = (GaaVendedor) lista.get(rowIndex);
+        GaaUsuarios usuarios = (GaaUsuarios) lista.get(rowIndex);
         if (columnIndex == 0) {
-            return vendedor.getGaaIdVendedor();
+            return usuarios.getGaaIdusuarios();
         }
         if (columnIndex == 1) {
-            return vendedor.getGaaNome();
+            return usuarios.getGaaNome();
         }
         if (columnIndex == 2) {
-            return vendedor.getGaaCpf();
+            return usuarios.getGaaCpf();
         }
         if (columnIndex == 3) {
-            return vendedor.getGaaSalario();
+            return usuarios.getGaaDataNascimento();
         }
         return "";
     }
@@ -63,10 +64,9 @@ public class ControllerVendedor extends AbstractTableModel{
             return "Cpf";
         }
         if (column == 3) {
-            return "Salário";
+            return "Data Nascimento";
         }
         return "";
     }
 }
     
-

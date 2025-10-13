@@ -2,20 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package view;
-import bean.GaaClientes;
+package view.Controllers;
+import bean.GaaVendasProdutos;
 
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author ACER
  */
-public class ControllerClientes extends AbstractTableModel{
+public class ControllerVendasProdutos extends AbstractTableModel{
 
- private List lista;
+    private List lista;
 
     public void setList(List lista) {
         this.lista = lista;
@@ -27,7 +26,8 @@ public class ControllerClientes extends AbstractTableModel{
     
     @Override
     public int getRowCount() {
-        return lista.size();
+        
+        return 0; 
     }
 
     @Override
@@ -37,18 +37,18 @@ public class ControllerClientes extends AbstractTableModel{
     
      @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        GaaClientes clientes = (GaaClientes) lista.get(rowIndex);
+         GaaVendasProdutos vendasProdutos = (GaaVendasProdutos) lista.get(rowIndex);
         if (columnIndex == 0) {
-            return clientes.getGaaIdClientes();
+            return vendasProdutos.getGaaIdVendasProdutos();
         }
         if (columnIndex == 1) {
-            return clientes.getGaaNome();
+            return vendasProdutos.getGaaVendas();
         }
         if (columnIndex == 2) {
-            return clientes.getGaaCpf();
+            return vendasProdutos.getGaaProdutos();
         }
         if (columnIndex == 3) {
-            return clientes.getGaaDataCadastro();
+            return vendasProdutos.getGaaDataEntrega();
         }
         return "";
     }
@@ -59,14 +59,15 @@ public class ControllerClientes extends AbstractTableModel{
             return "Código";
         }
         if (column == 1) {
-            return "Nome";
+            return "Código da Venda";
         }
         if (column == 2) {
-            return "Cpf";
+            return "Código do Produto";
         }
         if (column == 3) {
-            return "Data Cadastro";
+            return "Data de entrega";
         }
         return "";
     }
 }
+    
