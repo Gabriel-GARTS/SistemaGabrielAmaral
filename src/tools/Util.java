@@ -71,7 +71,7 @@ public static void habilitar(boolean valor, JComponent... componentes) {
         }
     }
 
-    public static String doubleToStr(String num) {
+    public static String doubleToStr(double num) {
         return String.valueOf(num);
     }
 

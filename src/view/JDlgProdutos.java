@@ -9,11 +9,16 @@ package view;
  * @author ACER
  */
 
-
+import bean.GaaProdutos;
+import dao.ProdutosDAO;
 import javax.swing.JOptionPane;
 import tools.Util;
+
+
+
 public class JDlgProdutos extends javax.swing.JDialog {
-    private boolean pesquisado = false;
+    private boolean pesquisar = false;
+    private boolean incluir = false; 
     /**
      * Creates new form JDlgProdutos
      */
@@ -27,6 +32,38 @@ public class JDlgProdutos extends javax.swing.JDialog {
                 jChbAtivo, jBtnConfirmar, jBtnCancelar);
     }
  
+    public GaaProdutos viewBean() {
+        GaaProdutos clientes = new GaaProdutos();
+        clientes.setGaaIdProdutos(Util.strToInt(jTxtCodigo.getText()));
+        clientes.setGaaNome(jTxtNome.getText());
+        clientes.setGaaDescricao(jTxtDescricao.getText());
+        
+        clientes.setGaaPreco(Util.strToDouble(jTxtPreco.getText()));
+        clientes.setGaaMarca(jTxtMarca.getText());
+        clientes.setGaaMaterial(jTxtMaterial.getText());
+        if (jChbAtivo.isSelected() == true){
+            clientes.setGaaAtivo("S");
+        } else {
+            clientes.setGaaAtivo("N");            
+        }
+        return clientes;
+    }
+    
+   public void beanView(GaaProdutos produtos) {
+        jTxtCodigo.setText(Util.intToStr(produtos.getGaaIdProdutos()));
+        jTxtNome.setText(produtos.getGaaNome());
+        jTxtDescricao.setText(produtos.getGaaDescricao());
+        jTxtPreco.setText(String.valueOf(produtos.getGaaPreco()));
+        jTxtMarca.setText(produtos.getGaaMarca());
+        jTxtMaterial.setText(produtos.getGaaMaterial());
+        if (produtos.getGaaAtivo().equals("S") == true){
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -213,23 +250,34 @@ public class JDlgProdutos extends javax.swing.JDialog {
         Util.habilitar(true ,jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo , jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo);
+        jTxtCodigo.grabFocus();
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-          if (!pesquisado) {
+       
+          if (!pesquisar) {
         JOptionPane.showMessageDialog(this, "É necessário pesquisar um produto antes de alterar.");
         return;}
         Util.habilitar(true ,jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo , jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         jTxtCodigo.setEnabled(false);
         jTxtNome.grabFocus();
-        pesquisado = false;
+        pesquisar = false;
+        
         
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+         ProdutosDAO produtosDAO = new ProdutosDAO();
+            
+            if(incluir == true){
+                produtosDAO.insert(viewBean());
+            }else {
+                produtosDAO.update(viewBean());
+            }
         Util.habilitar(false ,jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo , jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo);
@@ -244,24 +292,28 @@ public class JDlgProdutos extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if (!pesquisado) {
+        if (!pesquisar) {
         JOptionPane.showMessageDialog(this, "É necessário pesquisar um produto antes de excluir.");
-        return;
-    }
-        int resp = JOptionPane.showConfirmDialog(null, "Confirma Exclusão ?");
-        if (resp == JOptionPane.YES_OPTION) {
+        return;}
+        if (Util.perguntar("Deseja Excluir?") == true){
+                ProdutosDAO produtosDAO = new ProdutosDAO();
+                produtosDAO.delete(viewBean());
+        Util.mensagem("Voce excloiu com sucessfuly");
+                
         Util.habilitar(false ,jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo , jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jTxtNome, jTxtDescricao, jTxtPreco, jTxtMarca, jTxtMaterial, jChbAtivo);
-        }
+            }
         
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-         pesquisado = true;
         JDlgProdutosPesquisar jDlgProdutosPesquisar = new JDlgProdutosPesquisar(null, true);
-        jDlgProdutosPesquisar.setTelaPai(this);
+        jDlgProdutosPesquisar.setTelaAnterior(this);
         jDlgProdutosPesquisar.setVisible(true);
+        pesquisar = true;
+        incluir = false;
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     /**

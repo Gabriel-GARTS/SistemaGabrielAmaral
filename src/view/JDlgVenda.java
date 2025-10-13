@@ -8,17 +8,13 @@ package view;
  *
  * @author ACER
  */
-import view.Controllers.ControllerVendasProdutos;
+import dao.ClientesDAO;
+import bean.GaaClientes;
 import bean.GaaVendas;
-import dao.VendasDAO;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
+import bean.GaaVendedor;
+import java.util.List;
+import tools.Util;
+
 
 
 
@@ -26,88 +22,30 @@ public class JDlgVenda extends javax.swing.JDialog {
     
     private boolean pesquisado = false;
     boolean incluir = false;
-    private MaskFormatter mascaraDataVenda,mascaraDataPagamento;
+    
+    
 
     /**
      * Creates new form JDlgVenda
      */
+    
+    
     public JDlgVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Vendas");
+        setTitle("Lista de vendas");
         setLocationRelativeTo(null);
+        Util.habilitar(false, jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jTxtTotal ,jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
+        Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+       
+        ClientesDAO clientesDAO = new ClientesDAO();
+        List lista = (List) clientesDAO.listAll();
+        for (int i = 0; i < lista.size(); i++) {
+            jCboClientes.addItem((Clientes) lista.get(i)); 
+        }
         
-        try {
-        mascaraDataPagamento = new MaskFormatter("##/##/####");
-        mascaraDataVenda = new MaskFormatter("##/##/####");
-        
-        jFmtDataPagamento.setFormatterFactory(new DefaultFormatterFactory(mascaraDataPagamento));
-        jFmtDataVenda.setFormatterFactory(new DefaultFormatterFactory(mascaraDataVenda));
-    } catch (ParseException ex) {
-        Logger.getLogger(JDlgVenda.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        
-        jTxtCodigo.setEnabled(false);
-        jCboCliente.setEnabled(false);
-        jCboVendedor.setEnabled(false);
-        jTxtTotal.setEnabled(false);
-        
-        jFmtDataPagamento.setEnabled(false);
-        jFmtDataVenda.setEnabled(false);
-        jCboStatus.setEnabled(false);
-        jCboMetodoPagamento.setEnabled(false);
-        
-        
-        
-        
-        jBtnConfirmar.setEnabled(false);
-        jBtnCancelar.setEnabled(false);
-        
-        ControllerVendasProdutos controllerVendasProdutos;
-      
-        controllerVendasProdutos = new ControllerVendasProdutos();
-        
-        jTable1.setModel(controllerVendasProdutos);
-    }
-    
-    private void Habilitar(boolean valor) {
-    jBtnIncluir.setEnabled(!valor);
-    jBtnIncluirVP.setEnabled(!valor);
-    jBtnAlterar.setEnabled(!valor);
-    jBtnAlterarVP.setEnabled(!valor);
-    jBtnConfirmar.setEnabled(valor);
-    jBtnCancelar.setEnabled(valor);
-    jBtnPesquisar.setEnabled(!valor);
-    jBtnExcluir.setEnabled(!valor);
-    jBtnExcluirVP.setEnabled(!valor);
-    
-        jTxtCodigo.setEnabled(valor);
-        jCboCliente.setEnabled(valor);
-        jCboVendedor.setEnabled(valor);
-        jTxtTotal.setEnabled(valor);
-        
-        jFmtDataPagamento.setEnabled(valor);
-        jFmtDataVenda.setEnabled(valor);
-        jCboStatus.setEnabled(valor);
-        jCboMetodoPagamento.setEnabled(valor);
-        
-        
-
         
     }
-    
-     private void LimparCampos() {
-    jTxtCodigo.setText("");
-    jCboCliente.setSelectedItem(0); 
-    jCboVendedor.setSelectedItem(0); 
-    jTxtTotal.setText("");
-    jCboStatus.setSelectedIndex(0);       
-    jCboMetodoPagamento.setSelectedIndex(0);       
-    jFmtDataVenda.setText("");
-    jFmtDataPagamento.setText("");
-   
-   
-}
      
      public void beanView(GaaVendas vendas) {
         String codigo = String.valueOf(vendas.getGaaIdVendas());

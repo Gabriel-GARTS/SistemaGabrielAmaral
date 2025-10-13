@@ -2,7 +2,7 @@ package bean;
 // Generated 13/10/2025 08:01:10 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
+
 
 
 import javax.persistence.Column;
@@ -25,7 +25,7 @@ public class GaaProdutos  implements java.io.Serializable {
      private int gaaIdProdutos;
      private String gaaNome;
      private String gaaDescricao;
-     private BigDecimal gaaPreco;
+     private double gaaPreco;
      private String gaaMarca;
      private String gaaMaterial;
      private String gaaAtivo;
@@ -37,7 +37,7 @@ public class GaaProdutos  implements java.io.Serializable {
 
 	
     
-    public GaaProdutos(int gaaIdProdutos, String gaaNome, String gaaDescricao, BigDecimal gaaPreco, String gaaMarca, String gaaMaterial, String gaaAtivo) {
+    public GaaProdutos(int gaaIdProdutos, String gaaNome, String gaaDescricao, double gaaPreco, String gaaMarca, String gaaMaterial, String gaaAtivo) {
        this.gaaIdProdutos = gaaIdProdutos;
        this.gaaNome = gaaNome;
        this.gaaDescricao = gaaDescricao;
@@ -83,11 +83,11 @@ public class GaaProdutos  implements java.io.Serializable {
 
     
     @Column(name="gaa_preco", nullable=false, precision=10)
-    public BigDecimal getGaaPreco() {
+    public double getGaaPreco() {
         return this.gaaPreco;
     }
     
-    public void setGaaPreco(BigDecimal gaaPreco) {
+    public void setGaaPreco(double gaaPreco) {
         this.gaaPreco = gaaPreco;
     }
 

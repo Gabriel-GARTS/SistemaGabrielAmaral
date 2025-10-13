@@ -6,7 +6,7 @@ package view;
 import view.Controllers.ControllerClientes;
 import bean.GaaClientes;
 import dao.ClientesDAO;
-import dao.UsuariosDAO;
+
 import java.util.List;
 /**
  *
@@ -25,7 +25,7 @@ public class JDlgClientesPesquisar extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Pesquisar Usuários");
+        setTitle("Pesquisar Clientes");
         controllerClientes = new ControllerClientes();
         ClientesDAO clientesDAO = new ClientesDAO();
         List lista = (List) clientesDAO.listAll();

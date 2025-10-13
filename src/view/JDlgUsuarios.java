@@ -17,7 +17,7 @@ import tools.Util;
 public class JDlgUsuarios extends javax.swing.JDialog {
     
     private boolean pesquisar = false;
-    private boolean incluir; 
+    private boolean incluir = false; 
     /**
      * Creates new form JDlgUsuarios
      */
@@ -367,6 +367,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         jDlgUsuariosPesquisar.setTelaAnterior(this);
         jDlgUsuariosPesquisar.setVisible(true);
         pesquisar = true;
+        incluir= false;
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jPwfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPwfSenhaActionPerformed
