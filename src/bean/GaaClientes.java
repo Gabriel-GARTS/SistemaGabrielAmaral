@@ -33,8 +33,8 @@ public class GaaClientes  implements java.io.Serializable {
      private String gaaCep;
      private String gaaCpf;
      private Date gaaDataNascimento;
-     private String gaaGenero;
-     private String gaaTrabalhoFormal;
+     private int gaaGenero;
+     private int gaaTrabalhoFormal;
      private String gaaProfissao;
      private String gaaAtivo;
      private Date gaaDataCadastro;
@@ -44,7 +44,7 @@ public class GaaClientes  implements java.io.Serializable {
     }
 
 	
-    public GaaClientes(int gaaIdClientes, String gaaNome, String gaaEmail, String gaaTelefone, String gaaEndereco, String gaaCidade, String gaaEstado, String gaaCep, String gaaCpf, String gaaGenero, String gaaTrabalhoFormal, String gaaProfissao, String gaaAtivo) {
+    public GaaClientes(int gaaIdClientes, String gaaNome, String gaaEmail, String gaaTelefone, String gaaEndereco, String gaaCidade, String gaaEstado, String gaaCep, String gaaCpf, int gaaGenero, int gaaTrabalhoFormal, String gaaProfissao, String gaaAtivo) {
         this.gaaIdClientes = gaaIdClientes;
         this.gaaNome = gaaNome;
         this.gaaEmail = gaaEmail;
@@ -59,7 +59,7 @@ public class GaaClientes  implements java.io.Serializable {
         this.gaaProfissao = gaaProfissao;
         this.gaaAtivo = gaaAtivo;
     }
-    public GaaClientes(int gaaIdClientes, String gaaNome, String gaaEmail, String gaaTelefone, String gaaEndereco, String gaaCidade, String gaaEstado, String gaaCep, String gaaCpf, Date gaaDataNascimento, String gaaGenero, String gaaTrabalhoFormal, String gaaProfissao, String gaaAtivo, Date gaaDataCadastro) {
+    public GaaClientes(int gaaIdClientes, String gaaNome, String gaaEmail, String gaaTelefone, String gaaEndereco, String gaaCidade, String gaaEstado, String gaaCep, String gaaCpf, Date gaaDataNascimento, int gaaGenero, int gaaTrabalhoFormal, String gaaProfissao, String gaaAtivo, Date gaaDataCadastro) {
        this.gaaIdClientes = gaaIdClientes;
        this.gaaNome = gaaNome;
        this.gaaEmail = gaaEmail;
@@ -171,7 +171,7 @@ public class GaaClientes  implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name="Gaa_dataNascimento", length=10)
+    @Column(name="gaa_dataNascimento", length=10)
     public Date getGaaDataNascimento() {
         return this.gaaDataNascimento;
     }
@@ -182,21 +182,21 @@ public class GaaClientes  implements java.io.Serializable {
 
     
     @Column(name="gaa_genero", nullable=false, length=10)
-    public String getGaaGenero() {
+    public int getGaaGenero() {
         return this.gaaGenero;
     }
     
-    public void setGaaGenero(String gaaGenero) {
+    public void setGaaGenero(int gaaGenero) {
         this.gaaGenero = gaaGenero;
     }
 
     
     @Column(name="gaa_trabalhoFormal", nullable=false, length=10)
-    public String getGaaTrabalhoFormal() {
+    public int getGaaTrabalhoFormal() {
         return this.gaaTrabalhoFormal;
     }
     
-    public void setGaaTrabalhoFormal(String gaaTrabalhoFormal) {
+    public void setGaaTrabalhoFormal(int gaaTrabalhoFormal) {
         this.gaaTrabalhoFormal = gaaTrabalhoFormal;
     }
 
@@ -221,7 +221,7 @@ public class GaaClientes  implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name="Gaa_dataCadastro", length=10)
+    @Column(name="gaa_dataCadastro", length=10)
     public Date getGaaDataCadastro() {
         return this.gaaDataCadastro;
     }

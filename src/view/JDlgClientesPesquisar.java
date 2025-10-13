@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package view;
+import view.Controllers.ControllerClientes;
+import bean.GaaClientes;
+import dao.ClientesDAO;
+import dao.UsuariosDAO;
+import java.util.List;
 /**
  *
  * @author ACER
@@ -13,14 +18,24 @@ public class JDlgClientesPesquisar extends javax.swing.JDialog {
     /**
      * Creates new form JDlgClientesPesquisar
      */
+    private JDlgClientes jDlgClientes;
+    ControllerClientes controllerClientes;
+    
     public JDlgClientesPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Pesquisar Usuários");
+        controllerClientes = new ControllerClientes();
+        ClientesDAO clientesDAO = new ClientesDAO();
+        List lista = (List) clientesDAO.listAll();
+        controllerClientes.setList(lista);
+        jTable1.setModel(controllerClientes);
         
     }
 
-    public void setTelaPai(JDlgClientes jDlgClientes){
+    public void setTelaAnterior(JDlgClientes jDlgClientes){
+        this.jDlgClientes = jDlgClientes;
        
     }
     /**
@@ -83,7 +98,10 @@ public class JDlgClientesPesquisar extends javax.swing.JDialog {
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
        
-        setVisible(false);
+        int linsel = jTable1.getSelectedRow();
+        GaaClientes clientes =  (GaaClientes) controllerClientes.getBean( jTable1.getSelectedRow() );
+        jDlgClientes.beanView(clientes);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**
