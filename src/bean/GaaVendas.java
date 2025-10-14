@@ -26,7 +26,7 @@ public class GaaVendas implements java.io.Serializable {
     private GaaClientes gaaClientes;
     private GaaVendedor gaaVendedor;
     private Date gaaDataVenda;
-    private BigDecimal gaaTotal;
+    private Double gaaTotal;
     private String gaaStatus;
     private String gaaMetodoPagamento;
     private Date gaaDataPagamento;
@@ -34,14 +34,14 @@ public class GaaVendas implements java.io.Serializable {
     public GaaVendas() {
     }
 
-    public GaaVendas(int gaaIdVendas, BigDecimal gaaTotal, String gaaStatus, String gaaMetodoPagamento) {
+    public GaaVendas(int gaaIdVendas, Double gaaTotal, String gaaStatus, String gaaMetodoPagamento) {
         this.gaaIdVendas = gaaIdVendas;
         this.gaaTotal = gaaTotal;
         this.gaaStatus = gaaStatus;
         this.gaaMetodoPagamento = gaaMetodoPagamento;
     }
 
-    public GaaVendas(int gaaIdVendas, GaaClientes gaaClientes, GaaVendedor gaaVendedor, Date gaaDataVenda, BigDecimal gaaTotal, String gaaStatus, String gaaMetodoPagamento, Date gaaDataPagamento) {
+    public GaaVendas(int gaaIdVendas, GaaClientes gaaClientes, GaaVendedor gaaVendedor, Date gaaDataVenda, Double gaaTotal, String gaaStatus, String gaaMetodoPagamento, Date gaaDataPagamento) {
         this.gaaIdVendas = gaaIdVendas;
         this.gaaClientes = gaaClientes;
         this.gaaVendedor = gaaVendedor;
@@ -94,11 +94,11 @@ public class GaaVendas implements java.io.Serializable {
     }
 
     @Column(name="gaa_total", nullable=false, precision=10)
-    public BigDecimal getGaaTotal() {
+    public Double getGaaTotal() {
         return this.gaaTotal;
     }
 
-    public void setGaaTotal(BigDecimal gaaTotal) {
+    public void setGaaTotal(Double gaaTotal) {
         this.gaaTotal = gaaTotal;
     }
 

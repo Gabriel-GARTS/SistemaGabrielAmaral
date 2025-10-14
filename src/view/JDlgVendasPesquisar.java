@@ -1,38 +1,41 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package view;
 
-
-import view.Controllers.ControllerVendas;
 import bean.GaaVendas;
 import dao.VendasDAO;
 import java.util.List;
+import view.Controllers.ControllerVendas;
 /**
  *
- * @author ACER
+ * @author u05594757139
  */
-public class JDlgVendaPesquisar extends javax.swing.JDialog {
+public class JDlgVendasPesquisar extends javax.swing.JDialog {
 
-    JDlgVenda jDlgVenda;
+    JDlgVendas jDlgVendas;
     ControllerVendas controllerVendas;
     /**
-     * Creates new form JDlgVendaPesquisar
+     * Creates new form JdlgVendasPesquisar
      */
-    public JDlgVendaPesquisar(java.awt.Frame parent, boolean modal) {
+    public JDlgVendasPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        VendasDAO vendasDao = new VendasDAO();
-        List lista = (List) vendasDao.listAll();
+        setTitle("Pesquisar Vendas");
+        VendasDAO apc_vendasDao = new VendasDAO();
+        List lista = (List) apc_vendasDao.listAll();
         controllerVendas = new ControllerVendas();
         controllerVendas.setList(lista);
         jTable1.setModel(controllerVendas);
     }
-    public void setTelaPai(JDlgVenda jDlgVenda) {
-        this.jDlgVenda = jDlgVenda;
+    
+    public void setTelaAnterior(JDlgVendas jDlgVendas) {
+        this.jDlgVendas = jDlgVendas;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,17 +77,20 @@ public class JDlgVendaPesquisar extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBtnOk)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBtnOk)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBtnOk))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnOk)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -94,7 +100,7 @@ public class JDlgVendaPesquisar extends javax.swing.JDialog {
         // TODO add your handling code here:
         int linSel = jTable1.getSelectedRow();
         GaaVendas vendas = (GaaVendas) controllerVendas.getBean(linSel);
-        jDlgVenda.beanView(vendas);
+        jDlgVendas.beanView(vendas);
         setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
@@ -115,13 +121,13 @@ public class JDlgVendaPesquisar extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgVendaPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgVendasPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgVendaPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgVendasPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgVendaPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgVendasPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgVendaPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgVendasPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -129,7 +135,7 @@ public class JDlgVendaPesquisar extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgVendaPesquisar dialog = new JDlgVendaPesquisar(new javax.swing.JFrame(), true);
+                JDlgVendasPesquisar dialog = new JDlgVendasPesquisar(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
