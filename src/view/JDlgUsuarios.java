@@ -32,6 +32,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
   
 
     }
+    
+   
     public GaaUsuarios viewBean() {
         GaaUsuarios usuarios = new GaaUsuarios();
         usuarios.setGaaIdusuarios(Util.strToInt(jTxtCodigo.getText()));
@@ -90,6 +92,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         jCboNivel = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jFmtDataDeNascimento = new javax.swing.JFormattedTextField();
+        jChbMostrarSenha = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -192,6 +195,13 @@ public class JDlgUsuarios extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
+        jChbMostrarSenha.setText("Mostrar a senha");
+        jChbMostrarSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jChbMostrarSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,25 +229,27 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBtnCancelar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnPesquisar))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jChbAtivo)
+                                    .addComponent(jBtnPesquisar)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6)
+                            .addComponent(jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(95, 95, 95)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jFmtDataDeNascimento)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel7)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(46, 46, 46)
-                                        .addComponent(jChbAtivo)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addComponent(jLabel7))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jChbMostrarSenha)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -267,12 +279,14 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jChbAtivo)
                     .addComponent(jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jCboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jChbAtivo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jChbMostrarSenha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnAlterar)
                     .addComponent(jBtnExcluir)
@@ -297,6 +311,18 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+        String senha= jPwfSenha.getText();
+        
+        if (!Util.ValidarSenha(senha)) {
+        JOptionPane.showMessageDialog(this,
+            "A senha deve ter pelo menos 8 caracteres, incluindo:\n" +
+            "- Uma letra maiúscula\n" +
+            "- Uma letra minúscula\n" +
+            "- Um número\n" +
+            "- Um caractere especial (ex: @, !, #, etc)");
+        return; 
+    }
+        
         UsuariosDAO usuariosDAO = new UsuariosDAO();
             
             if(incluir == true){
@@ -374,6 +400,16 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPwfSenhaActionPerformed
 
+    private void jChbMostrarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChbMostrarSenhaActionPerformed
+        // TODO add your handling code here:
+        if(jChbMostrarSenha.isSelected()) {
+            jPwfSenha.setEchoChar((char)0);
+        } else{
+            jPwfSenha.setEchoChar('*');
+        }
+        
+    }//GEN-LAST:event_jChbMostrarSenhaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -426,6 +462,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JComboBox<String> jCboNivel;
     private javax.swing.JCheckBox jChbAtivo;
+    private javax.swing.JCheckBox jChbMostrarSenha;
     private javax.swing.JFormattedTextField jFmtCpf;
     private javax.swing.JFormattedTextField jFmtDataDeNascimento;
     private javax.swing.JLabel jLabel1;

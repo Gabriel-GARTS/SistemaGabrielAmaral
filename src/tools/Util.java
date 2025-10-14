@@ -44,6 +44,31 @@ public static void habilitar(boolean valor, JComponent... componentes) {
             }
         }
     }
+    
+    public static boolean ValidarSenha(String senha){
+        if(senha.length()<8) { 
+            return false;
+        }
+        
+        boolean TemMaisculo = false;
+        boolean TemMinusculo = false;
+        boolean TemNumero = false;
+        boolean TemCaracterSepec = false;
+        
+        for(char c:senha.toCharArray()){
+            
+            if (Character.isUpperCase(c)) {
+            TemMaisculo = true; 
+            } else if(Character.isLowerCase(c)){
+                TemMinusculo = true;
+            } else if(Character.isDigit(c)) {
+                TemNumero = true;
+            } else if(!Character.isLetterOrDigit(c)) {
+                TemCaracterSepec =  true;
+            }
+        }
+        return TemMaisculo && TemMinusculo && TemNumero && TemCaracterSepec;
+     }
 
     public static void mensagem(String cad) {
         JOptionPane.showMessageDialog(null, cad);

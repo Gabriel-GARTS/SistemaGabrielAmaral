@@ -135,6 +135,12 @@ public class JDlgVendas extends javax.swing.JDialog {
 
         jLabel6.setText("Total");
 
+        jTxtTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtTotalActionPerformed(evt);
+            }
+        });
+
         jLabel7.setText("Status");
 
         jLabel8.setText("metodo de pagamento");
@@ -424,6 +430,10 @@ public class JDlgVendas extends javax.swing.JDialog {
         JDlgVendasProdutos jDlgvendasProdutos = new JDlgVendasProdutos(null, true );
         jDlgvendasProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
+
+    private void jTxtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtTotalActionPerformed
 
     /**
      * @param args the command line arguments

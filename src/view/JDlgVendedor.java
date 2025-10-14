@@ -4,7 +4,10 @@
  */
 package view;
 
+import bean.GaaVendedor;
+import dao.VendedorDAO;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import tools.Util;
 
 /**
@@ -14,7 +17,9 @@ import tools.Util;
 
 
 public class JDlgVendedor extends javax.swing.JDialog {
-private boolean pesquisado = false;
+    
+    private boolean pesquisar = false;
+    private boolean incluir = false; 
 
 
     /**
@@ -26,9 +31,35 @@ private boolean pesquisado = false;
         setTitle("Cadastro de Vendedor");
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtEmail,
-               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
+                jFmtCpf, jTxtTelefone, jCboTurno, jTxtSalario,
+                jBtnConfirmar, jBtnCancelar);
+ 
     }
     
+    public GaaVendedor viewBean() {
+            GaaVendedor vendedor = new GaaVendedor();
+            vendedor.setGaaIdVendedor(Util.strToInt(jTxtCodigo.getText()));
+            vendedor.setGaaNome(jTxtNome.getText());
+            vendedor.setGaaEmail(jTxtEmail.getText());
+            vendedor.setGaaCpf(jFmtCpf.getText()); 
+            vendedor.setGaaSalario(Util.strToDouble(jTxtSalario.getText())); 
+            //vendedor.setGaaTurno(jCboTurno.getSelectedIndex); 
+            
+            return vendedor;
+}
+    
+    public void beanView(GaaVendedor vendedor) {
+        jTxtCodigo.setText(Util.intToStr(vendedor.getGaaIdVendedor())); 
+        jTxtNome.setText(vendedor.getGaaNome());
+        jTxtEmail.setText(vendedor.getGaaEmail());
+        jFmtCpf.setText(vendedor.getGaaCpf());
+        
+        jTxtSalario.setText(Util.doubleToStr(vendedor.getGaaSalario()));
+        jCboTurno.setSelectedItem(vendedor.getGaaTurno());
+        
+       
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -224,34 +255,49 @@ private boolean pesquisado = false;
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtEmail,
-               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(false , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jTxtCodigo, jTxtNome, jTxtEmail,
-               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario);
+        
+        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtEmail, jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtEmail,jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario);jTxtCodigo.grabFocus();
+            incluir = true;
+            
+ 
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-         if (!pesquisado) {
+         if (!pesquisar) {
         JOptionPane.showMessageDialog(this, "É necessário pesquisar um Vendedor antes de alterar.");
         return;}
         Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtEmail,
                jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
         jTxtCodigo.setEnabled(false);
         jTxtNome.grabFocus();
-        pesquisado = false;
+        pesquisar = false;
         
         
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtEmail,
-               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(true , jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jTxtCodigo, jTxtNome, jTxtEmail,
-               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario);
+        VendedorDAO vendedorDAO = new VendedorDAO();
+            
+            if(incluir == true){
+                vendedorDAO.insert(viewBean());
+            }else {
+                vendedorDAO.update(viewBean());
+            }
+           
+            Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtEmail, jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
+            Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+            Util.limpar(jTxtCodigo, jTxtNome, jTxtEmail,jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario);jTxtCodigo.grabFocus();
+            
+            if(incluir == true){
+                vendedorDAO.insert(viewBean());
+            }else {
+                vendedorDAO.update(viewBean());
+            }
+           
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -265,25 +311,28 @@ private boolean pesquisado = false;
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if (!pesquisado) {
-        JOptionPane.showMessageDialog(this, "É necessário pesquisar um vendedor antes de excluir.");
+        if (!pesquisar) {
+        JOptionPane.showMessageDialog(this, "É necessário pesquisar um Vendedor antes de excluir.");
         return;}
-        int resp = JOptionPane.showConfirmDialog(null, "Confirma Exclusão?");
-    if (resp == JOptionPane.YES_OPTION) {
-         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtEmail,
-               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
-        Util.limpar(jTxtCodigo, jTxtNome, jTxtEmail,
-               jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario);
-        pesquisado = false;
-    }
+        if (Util.perguntar("Deseja Excluir?") == true){
+                VendedorDAO vendedorDAO = new VendedorDAO();
+                vendedorDAO.delete(viewBean());
+        Util.mensagem("Voce excloiu com sucessfuly");
+                
+            Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtEmail, jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
+            Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+            Util.limpar(jTxtCodigo, jTxtNome, jTxtEmail,jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario);jTxtCodigo.grabFocus();
+            }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-        pesquisado = true;
+        
         JDlgVendedorPesquisar jDlgVendedorPesquisar = new JDlgVendedorPesquisar(null, true);
-        jDlgVendedorPesquisar.setTelaPai(this);
+        jDlgVendedorPesquisar.setTelaAnterior(this);
         jDlgVendedorPesquisar.setVisible(true);
+        pesquisar = true;
+        incluir= false;
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jCboTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboTurnoActionPerformed

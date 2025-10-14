@@ -22,14 +22,14 @@ public class GaaVendedor  implements java.io.Serializable {
      private String gaaNome;
      private String gaaTelefone;
      private String gaaCpf;
-     private String gaaTurno;
-     private BigDecimal gaaSalario;
+     private int gaaTurno;
+     private Double gaaSalario;
      private String gaaEmail;
 
     public GaaVendedor() {
     }
 
-    public GaaVendedor(int gaaIdVendedor, String gaaNome, String gaaTelefone, String gaaCpf, String gaaTurno, BigDecimal gaaSalario, String gaaEmail) {
+    public GaaVendedor(int gaaIdVendedor, String gaaNome, String gaaTelefone, String gaaCpf, int gaaTurno, Double gaaSalario, String gaaEmail) {
        this.gaaIdVendedor = gaaIdVendedor;
        this.gaaNome = gaaNome;
        this.gaaTelefone = gaaTelefone;
@@ -83,21 +83,21 @@ public class GaaVendedor  implements java.io.Serializable {
 
     
     @Column(name="gaa_turno", nullable=false, length=20)
-    public String getGaaTurno() {
+    public int getGaaTurno() {
         return this.gaaTurno;
     }
     
-    public void setGaaTurno(String gaaTurno) {
+    public void setGaaTurno(int gaaTurno) {
         this.gaaTurno = gaaTurno;
     }
 
     
     @Column(name="gaa_salario", nullable=false, precision=7)
-    public BigDecimal getGaaSalario() {
+    public Double getGaaSalario() {
         return this.gaaSalario;
     }
     
-    public void setGaaSalario(BigDecimal gaaSalario) {
+    public void setGaaSalario(Double gaaSalario) {
         this.gaaSalario = gaaSalario;
     }
 
