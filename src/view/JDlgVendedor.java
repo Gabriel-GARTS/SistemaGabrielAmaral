@@ -43,8 +43,8 @@ public class JDlgVendedor extends javax.swing.JDialog {
             vendedor.setGaaEmail(jTxtEmail.getText());
             vendedor.setGaaCpf(jFmtCpf.getText()); 
             vendedor.setGaaSalario(Util.strToDouble(jTxtSalario.getText())); 
-            //vendedor.setGaaTurno(jCboTurno.getSelectedIndex); 
-            
+            vendedor.setGaaTurno(jCboTurno.getSelectedIndex());
+            vendedor.setGaaTelefone(jTxtTelefone.getText());
             return vendedor;
 }
     
@@ -53,9 +53,9 @@ public class JDlgVendedor extends javax.swing.JDialog {
         jTxtNome.setText(vendedor.getGaaNome());
         jTxtEmail.setText(vendedor.getGaaEmail());
         jFmtCpf.setText(vendedor.getGaaCpf());
-        
+        jTxtTelefone.setText(vendedor.getGaaTelefone());
         jTxtSalario.setText(Util.doubleToStr(vendedor.getGaaSalario()));
-        jCboTurno.setSelectedItem(vendedor.getGaaTurno());
+         jCboTurno.setSelectedIndex(vendedor.getGaaTurno());
         
        
         
@@ -271,7 +271,7 @@ public class JDlgVendedor extends javax.swing.JDialog {
         return;}
         Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtEmail,
                jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
-        jTxtCodigo.setEnabled(false);
+         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         jTxtNome.grabFocus();
         pesquisar = false;
         
@@ -288,8 +288,8 @@ public class JDlgVendedor extends javax.swing.JDialog {
                 vendedorDAO.update(viewBean());
             }
            
-            Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtEmail, jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
-            Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+            Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtEmail, jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario, jBtnConfirmar, jBtnCancelar);
+            Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
             Util.limpar(jTxtCodigo, jTxtNome, jTxtEmail,jTxtTelefone,jFmtCpf, jCboTurno,jTxtSalario);jTxtCodigo.grabFocus();
             
             if(incluir == true){
