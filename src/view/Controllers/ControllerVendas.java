@@ -56,10 +56,10 @@ public class ControllerVendas extends AbstractTableModel{
             return "Código Venda";
         }
         if (column == 1) {
-            return "Código Cliente";
+            return "Nome Cliente";
         }
         if (column == 2) {
-            return "Código Vendedor";
+            return "nome Vendedor";
         }
         if (column == 3) {
             return "Total";

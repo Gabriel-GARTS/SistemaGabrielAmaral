@@ -7,6 +7,7 @@ import bean.GaaVendasProdutos;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import tools.Util;
 
 /**
  *
@@ -29,32 +30,41 @@ public class ControllerVendasProdutos extends AbstractTableModel{
         this.lstVendProd.add(vendasProdutos);
         this.fireTableDataChanged();
     }
+     
+     public void removeBean(int rowIndex) {
+        this.lstVendProd.remove(rowIndex); 
+        this.fireTableDataChanged();
+    }
     
     @Override
     public int getRowCount() {
         
-        return 0; 
+       return lstVendProd.size();
     }
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
     
      @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-         GaaVendasProdutos vendasProdutos = (GaaVendasProdutos) lstVendProd.get(rowIndex);
+         GaaVendasProdutos vendProd = (GaaVendasProdutos) lstVendProd.get(rowIndex);
         if (columnIndex == 0) {
-            return vendasProdutos.getGaaIdVendasProdutos();
+             return vendProd.getGaaProdutos().getGaaIdProdutos();
         }
         if (columnIndex == 1) {
-            return vendasProdutos.getGaaVendas();
+             return vendProd.getGaaProdutos().getGaaNome();
         }
         if (columnIndex == 2) {
-            return vendasProdutos.getGaaProdutos();
+             return vendProd.getGaaQuantidade();
         }
         if (columnIndex == 3) {
-            return vendasProdutos.getGaaDataEntrega();
+               return Util.dateToStr(vendProd.getGaaDataEntrega());
+        }
+        
+        if (columnIndex == 4) {
+               return vendProd.getGaaQuantidade() * vendProd.getGaaPrecoUnitario();
         }
         return "";
     }
@@ -65,13 +75,16 @@ public class ControllerVendasProdutos extends AbstractTableModel{
             return "Código";
         }
         if (column == 1) {
-            return "Código da Venda";
+            return "Nome";
         }
         if (column == 2) {
-            return "Código do Produto";
+            return "Quantidade";
         }
         if (column == 3) {
-            return "Data de entrega";
+            return "Data de Entrega";
+        }
+        if (column == 4) {
+            return "Preço";
         }
         return "";
     }
