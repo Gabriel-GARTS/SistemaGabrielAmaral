@@ -28,22 +28,22 @@ public class GaaVendasProdutos  implements java.io.Serializable {
      private GaaProdutos gaaProdutos;
      private GaaVendas gaaVendas;
      private int gaaQuantidade;
-     private BigDecimal gaaPrecoUnitario;
-     private BigDecimal gaaDesconto;
+     private double gaaPrecoUnitario;
+     private double gaaDesconto;
      private Date gaaDataEntrega;
 
     public GaaVendasProdutos() {
     }
 
 	
-    public GaaVendasProdutos(int gaaIdVendasProdutos, GaaProdutos gaaProdutos, GaaVendas gaaVendas, int gaaQuantidade, BigDecimal gaaPrecoUnitario) {
+    public GaaVendasProdutos(int gaaIdVendasProdutos, GaaProdutos gaaProdutos, GaaVendas gaaVendas, int gaaQuantidade, double gaaPrecoUnitario) {
         this.gaaIdVendasProdutos = gaaIdVendasProdutos;
         this.gaaProdutos = gaaProdutos;
         this.gaaVendas = gaaVendas;
         this.gaaQuantidade = gaaQuantidade;
         this.gaaPrecoUnitario = gaaPrecoUnitario;
     }
-    public GaaVendasProdutos(int gaaIdVendasProdutos, GaaProdutos gaaProdutos, GaaVendas gaaVendas, int gaaQuantidade, BigDecimal gaaPrecoUnitario, BigDecimal gaaDesconto, Date gaaDataEntrega) {
+    public GaaVendasProdutos(int gaaIdVendasProdutos, GaaProdutos gaaProdutos, GaaVendas gaaVendas, int gaaQuantidade, double gaaPrecoUnitario, double gaaDesconto, Date gaaDataEntrega) {
        this.gaaIdVendasProdutos = gaaIdVendasProdutos;
        this.gaaProdutos = gaaProdutos;
        this.gaaVendas = gaaVendas;
@@ -97,21 +97,21 @@ public class GaaVendasProdutos  implements java.io.Serializable {
 
     
     @Column(name="gaa_precoUnitario", nullable=false, precision=10)
-    public BigDecimal getGaaPrecoUnitario() {
+    public double getGaaPrecoUnitario() {
         return this.gaaPrecoUnitario;
     }
     
-    public void setGaaPrecoUnitario(BigDecimal gaaPrecoUnitario) {
+    public void setGaaPrecoUnitario(double gaaPrecoUnitario) {
         this.gaaPrecoUnitario = gaaPrecoUnitario;
     }
 
     
     @Column(name="gaa_desconto", precision=10)
-    public BigDecimal getGaaDesconto() {
+    public double getGaaDesconto() {
         return this.gaaDesconto;
     }
     
-    public void setGaaDesconto(BigDecimal gaaDesconto) {
+    public void setGaaDesconto(double gaaDesconto) {
         this.gaaDesconto = gaaDesconto;
     }
 

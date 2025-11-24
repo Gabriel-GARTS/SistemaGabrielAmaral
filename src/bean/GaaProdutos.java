@@ -121,11 +121,27 @@ public class GaaProdutos  implements java.io.Serializable {
         this.gaaAtivo = gaaAtivo;
     }
 
+ @Override
+    public String toString(){
+    return this.getGaaNome();
+    }
 
-
-
-
-
+    @Override
+    public boolean equals( Object object){
+        if(object instanceof GaaProdutos) {
+            GaaProdutos gaaProdutos = (GaaProdutos)object;
+            if(this.getGaaIdProdutos() == gaaProdutos.getGaaIdProdutos()){
+                return true;
+            }
+    }
+        return false;
+    
+    }
+ 
 }
+
+
+
+
 
 

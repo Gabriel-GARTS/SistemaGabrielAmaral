@@ -14,14 +14,20 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ControllerVendasProdutos extends AbstractTableModel{
 
-    private List lista;
+    private List lstVendProd;
 
-    public void setList(List lista) {
-        this.lista = lista;
+    public void setList(List lstPedidosProdutos) {
+        this.lstVendProd = lstPedidosProdutos;
+        this.fireTableDataChanged();
     }
 
-    public Object getBean(int rowIndex) {
-       return lista.get(rowIndex);    
+    public GaaVendasProdutos getBean(int rowIndex) {
+        return (GaaVendasProdutos) lstVendProd.get(rowIndex);
+    }
+    
+     public void addBean(GaaVendasProdutos vendasProdutos){
+        this.lstVendProd.add(vendasProdutos);
+        this.fireTableDataChanged();
     }
     
     @Override
@@ -37,7 +43,7 @@ public class ControllerVendasProdutos extends AbstractTableModel{
     
      @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-         GaaVendasProdutos vendasProdutos = (GaaVendasProdutos) lista.get(rowIndex);
+         GaaVendasProdutos vendasProdutos = (GaaVendasProdutos) lstVendProd.get(rowIndex);
         if (columnIndex == 0) {
             return vendasProdutos.getGaaIdVendasProdutos();
         }

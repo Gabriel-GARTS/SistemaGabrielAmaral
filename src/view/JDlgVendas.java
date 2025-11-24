@@ -16,12 +16,13 @@ import dao.VendedorDAO;
 import tools.Util;
 import java.util.List;
 import javax.swing.JOptionPane;
+import view.Controllers.ControllerVendasProdutos;
 /**
  *
  * @author u05594757139
  */
 public class JDlgVendas extends javax.swing.JDialog {
-
+    ControllerVendasProdutos controllerVendasProdutos;
     private boolean pesquisar = false;
     private boolean incluir = false; 
     /**
@@ -84,7 +85,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jTxtCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jCboVendedor = new javax.swing.JComboBox<>();
+        jCboVendedor = new javax.swing.JComboBox<GaaVendedor>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jFmtDataPagamento = new javax.swing.JFormattedTextField();
@@ -107,13 +108,19 @@ public class JDlgVendas extends javax.swing.JDialog {
         jBtnExcluirProd = new javax.swing.JButton();
         jBtnAlterarProd = new javax.swing.JButton();
         jBtnIncluirProd = new javax.swing.JButton();
-        jCboClientes = new javax.swing.JComboBox<>();
+        jCboClientes = new javax.swing.JComboBox<GaaClientes>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Codigo");
 
         jLabel2.setText("Vendedor");
+
+        jCboVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCboVendedorActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Cliente");
 
@@ -434,6 +441,10 @@ public class JDlgVendas extends javax.swing.JDialog {
     private void jTxtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTotalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtTotalActionPerformed
+
+    private void jCboVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboVendedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCboVendedorActionPerformed
 
     /**
      * @param args the command line arguments
