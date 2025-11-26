@@ -6,7 +6,12 @@
 package dao;
 
 import bean.GaaUsuarios;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -22,6 +27,19 @@ public class UsuariosDAO extends AbstractDAO{
         session.save(object);
         session.getTransaction().commit();
     }
+    
+    public boolean autentificacao(String apelido, String senha) {
+        try {
+            PreparedStatement pst;
+            pst = cnt.prepareStatement("select * from gaa_usuarios where gaa_apelido=? and gaa_senha=?");
+            pst.setString(1, apelido);
+            pst.setString(2, senha);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()==true) return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuariosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;}
 
     @Override
     public void update(Object object) {

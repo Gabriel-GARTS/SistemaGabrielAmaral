@@ -396,6 +396,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         }
         Util.limpar(jTxtCodigo, jTxtTotal, jCboClientes, jCboVendedor, jFmtDataPagamento,jFmtDataVenda,jTxtStatus,jTxtMetodopag);
         controllerVendasProdutos.setList(new ArrayList());
+        
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
@@ -420,7 +421,7 @@ public class JDlgVendas extends javax.swing.JDialog {
                 jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jTxtTotal, jCboClientes, jCboVendedor, jFmtDataPagamento, jFmtDataVenda, jTxtStatus, jTxtMetodopag);
-
+         controllerVendasProdutos.setList(new ArrayList());           
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
