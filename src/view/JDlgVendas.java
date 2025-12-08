@@ -418,6 +418,12 @@ public class JDlgVendas extends javax.swing.JDialog {
             }
         } else {
             vendasDAO.update(venda);
+            vendaProdutosDAO.deleteVenda(venda);
+            for (int ind = 0; ind < jTblVendaPRodutos.getRowCount(); ind++) {
+                GaaVendasProdutos vendasProdutos = controllerVendasProdutos.getBean(ind);
+                vendasProdutos.setGaaVendas(venda);
+                vendaProdutosDAO.insert(vendasProdutos);
+            }
         }
 
         Util.habilitar(false, jTxtCodigo, jFmtDataPagamento, jFmtDataVenda, jCboClientes,
