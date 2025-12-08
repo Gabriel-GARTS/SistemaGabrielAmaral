@@ -78,6 +78,9 @@ public class JDlgVendas extends javax.swing.JDialog {
         jTxtTotal.setText(Util.doubleToStr(vendas.getGaaTotal()));
         jTxtStatus.setText(vendas.getGaaStatus());
         jTxtMetodopag.setText(vendas.getGaaMetodoPagamento());
+        VendaProdutosDAO vendasProdutosDAO = new VendaProdutosDAO();
+        List lista = (List) vendasProdutosDAO.listProdutos(vendas);
+        controllerVendasProdutos.setList(lista);
 }
 
     /**
@@ -366,6 +369,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         Util.habilitar(true, jTxtCodigo, jFmtDataPagamento,jFmtDataVenda,jTxtMetodopag,jTxtStatus, jCboClientes, jCboVendedor, jTxtTotal ,jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jFmtDataPagamento,jFmtDataVenda,jTxtMetodopag,jTxtStatus, jCboClientes, jCboVendedor, jTxtTotal);
+        controllerVendasProdutos.setList(new ArrayList());
         jTxtCodigo.grabFocus();
         incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed

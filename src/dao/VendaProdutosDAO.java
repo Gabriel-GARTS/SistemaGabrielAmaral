@@ -5,6 +5,7 @@
  */
 package dao;
 
+import bean.GaaVendas;
 import bean.GaaVendasProdutos;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -51,6 +52,14 @@ public class VendaProdutosDAO extends AbstractDAO{
         return lista;
     }
 
+    public Object listProdutos(GaaVendas vendas) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GaaVendasProdutos.class);
+        criteria.add(Restrictions.eq("gaaVendas", vendas));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
     @Override
     public Object listAll() {
         session.beginTransaction();
@@ -59,5 +68,6 @@ public class VendaProdutosDAO extends AbstractDAO{
         session.getTransaction().commit();
         return lista;
     }
+    
     
 }
