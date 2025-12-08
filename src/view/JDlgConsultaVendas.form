@@ -34,13 +34,13 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTxtNome" min="-2" pref="261" max="-2" attributes="0"/>
+                          <Component id="jTxtNomeVendedor" min="-2" pref="261" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jTxtValor" min="-2" pref="261" max="-2" attributes="0"/>
+                              <Component id="jTxtTotal" min="-2" pref="261" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jBtnConsulta" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -59,13 +59,13 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTxtNome" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTxtNomeVendedor" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTxtValor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTxtTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jBtnConsulta" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -114,16 +114,16 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nome"/>
+        <Property name="text" type="java.lang.String" value="Vendedor"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtNome">
+    <Component class="javax.swing.JTextField" name="jTxtNomeVendedor">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtValor">
+    <Component class="javax.swing.JTextField" name="jTxtTotal">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Valor Maior que "/>
+        <Property name="text" type="java.lang.String" value="Total Maior que "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnConsulta">

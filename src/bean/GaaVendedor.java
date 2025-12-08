@@ -37,8 +37,9 @@ public class GaaVendedor  implements java.io.Serializable {
        this.gaaTurno = gaaTurno;
        this.gaaSalario = gaaSalario;
        this.gaaEmail = gaaEmail;
+       
+      
     }
-   
      @Id 
 
     

@@ -6,6 +6,7 @@
 package dao;
 
 import bean.GaaVendas;
+import bean.GaaVendedor;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -46,6 +47,35 @@ public class VendasDAO extends AbstractDAO{
         session.beginTransaction();
         Criteria criteria = session.createCriteria(GaaVendas.class);
         criteria.add(Restrictions.eq("gaaIdVendas", codigo));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listVendedor(String nome) {
+        session.beginTransaction();
+        
+        Criteria criteria = session.createCriteria(GaaVendas.class).createAlias("gaaVendedor", "vendedor"); 
+        criteria.add(Restrictions.like("vendedor.gaaNome", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listTotal(double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GaaVendas.class);
+        criteria.add(Restrictions.ge("gaaTotal", valor));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listVendedorTotal(String nome , double total) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(GaaVendas.class).createAlias("gaaVendedor", "vendedor"); 
+        criteria.add(Restrictions.like("vendedor.gaaNome", "%" + nome + "%"));
+        criteria.add(Restrictions.ge("gaaTotal", total));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
