@@ -11,7 +11,7 @@ import bean.GaaClientes;
 import bean.GaaVendas;
 import bean.GaaVendasProdutos;
 import bean.GaaVendedor;
-import dao.UsuariosDAO;
+
 import dao.VendaProdutosDAO;
 import dao.VendasDAO;
 import dao.VendedorDAO;

@@ -87,7 +87,19 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
             }
         });
 
+        jTxtValorUnitario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtValorUnitarioActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Valor Unitário");
+
+        jTxtTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtTotalActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Total");
 
@@ -108,6 +120,12 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         });
 
         jLabel5.setText("desconto");
+
+        jTxtDesconto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTxtDescontoKeyReleased(evt);
+            }
+        });
 
         jLabel6.setText("data de entrega");
 
@@ -220,7 +238,8 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         GaaProdutos produtos = (GaaProdutos) jCboProdutos.getSelectedItem();
         jTxtValorUnitario.setText(Util.doubleToStr(produtos.getGaaPreco()));
         int quant = Util.strToInt(jTxtQuantidade.getText());
-        jTxtTotal.setText(Util.doubleToStr(quant * produtos.getGaaPreco()));
+        double desconto = Util.strToDouble(jTxtDesconto.getText());
+        jTxtTotal.setText(Util.doubleToStr(quant * produtos.getGaaPreco()  - desconto));
     }//GEN-LAST:event_jCboProdutosActionPerformed
 
     private void jTxtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtQuantidadeActionPerformed
@@ -229,14 +248,41 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
 
     private void jTxtQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtQuantidadeKeyReleased
         // TODO add your handling code here:
-        if(jTxtQuantidade.getText().isEmpty()== false) {
+       if(jTxtQuantidade.getText().isEmpty() == false) {
         GaaProdutos produtos = (GaaProdutos) jCboProdutos.getSelectedItem();
         int quant = Util.strToInt(jTxtQuantidade.getText());
-        jTxtTotal.setText(Util.doubleToStr(quant * produtos.getGaaPreco()));
-        } else {
-            jTxtTotal.setText("");
+        double desconto = 0;
+        if(jTxtDesconto.getText().isEmpty() == false) {
+            desconto = Util.strToDouble(jTxtDesconto.getText());
         }
+        jTxtTotal.setText(Util.doubleToStr(quant * produtos.getGaaPreco() - desconto));
+    } else {
+        jTxtTotal.setText("");
+    }
     }//GEN-LAST:event_jTxtQuantidadeKeyReleased
+
+    private void jTxtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtTotalActionPerformed
+
+    private void jTxtValorUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtValorUnitarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtValorUnitarioActionPerformed
+
+    private void jTxtDescontoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtDescontoKeyReleased
+        // TODO add your handling code here:
+        if(jTxtQuantidade.getText().isEmpty() == false) {
+        GaaProdutos produtos = (GaaProdutos) jCboProdutos.getSelectedItem();
+        int quant = Util.strToInt(jTxtQuantidade.getText());
+        double desconto = 0;
+        if(jTxtDesconto.getText().isEmpty() == false) {
+            desconto = Util.strToDouble(jTxtDesconto.getText());
+        }
+        jTxtTotal.setText(Util.doubleToStr(quant * produtos.getGaaPreco() - desconto));
+    } else {
+        jTxtTotal.setText("");
+    }
+    }//GEN-LAST:event_jTxtDescontoKeyReleased
 
     /**
      * @param args the command line arguments
