@@ -16,7 +16,7 @@ import tools.Util;
  * @author u05594757139
  */
 public class JDlgVendasProdutos extends javax.swing.JDialog {
-
+  private boolean incluir;
     JDlgVendas jDlgVendas;
     /**
      * Creates new form JDlgPedidosProdutos
@@ -28,6 +28,7 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtValorUnitario, jTxtTotal);
         jTxtQuantidade.setText("1");
+        jTxtDesconto.setText("0");
         
         ProdutosDAO produtosDAO = new ProdutosDAO();
         List lista = (List) produtosDAO.listAll();
@@ -36,8 +37,15 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         }       
     }
     
-    public void setTelaAnterior(JDlgVendas jDlgVendas){
-        this.jDlgVendas= jDlgVendas;
+    public void setTelaAnterior(JDlgVendas jDlgVendas, GaaVendasProdutos gaaVendasProdutos){
+        this.jDlgVendas = jDlgVendas;
+        incluir = true;
+        
+        if(jDlgVendas != null){
+            incluir = false;
+            jCboProdutos.setSelectedItem(gaaVendasProdutos.getGaaProdutos());
+            jTxtQuantidade.setText(Util.intToStr(gaaVendasProdutos.getGaaQuantidade()));
+        }
     }
 
     /**
@@ -217,14 +225,22 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        GaaVendasProdutos vendasProdutos = new GaaVendasProdutos();
-        vendasProdutos.setGaaProdutos((GaaProdutos) jCboProdutos.getSelectedItem());
-        vendasProdutos.setGaaQuantidade(Util.strToInt(jTxtQuantidade.getText()));
-        vendasProdutos.setGaaPrecoUnitario(Util.strToDouble(jTxtValorUnitario.getText()));
-        vendasProdutos.setGaaDataEntrega(Util.strToDate(jFmtDataEntrega.getText()));
-        jDlgVendas.controllerVendasProdutos.addBean(vendasProdutos);
-        
-        setVisible(false);
+    int rowIndex = jDlgVendas.getjTblVendasProdutos().getSelectedRow();
+    if (rowIndex == -1) {
+        Util.mensagem("Selecione um produto para alterar!");
+        return;  
+    }
+    GaaVendasProdutos vendasProdutos = new GaaVendasProdutos();
+    vendasProdutos.setGaaProdutos((GaaProdutos) jCboProdutos.getSelectedItem());
+    vendasProdutos.setGaaQuantidade(Util.strToInt(jTxtQuantidade.getText()));
+    vendasProdutos.setGaaDesconto(Util.strToDouble(jTxtDesconto.getText()));
+    vendasProdutos.setGaaPrecoUnitario(Util.strToDouble(jTxtValorUnitario.getText()));
+    vendasProdutos.setGaaDataEntrega(Util.strToDate(jFmtDataEntrega.getText()));
+    if (incluir == false) {
+        jDlgVendas.controllerVendasProdutos.removeBean(rowIndex);
+    }
+    jDlgVendas.controllerVendasProdutos.addBean(vendasProdutos);
+    setVisible(false);
         
     }//GEN-LAST:event_jBtnOkActionPerformed
 

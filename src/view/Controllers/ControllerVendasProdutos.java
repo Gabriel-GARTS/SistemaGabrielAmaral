@@ -64,7 +64,7 @@ public class ControllerVendasProdutos extends AbstractTableModel{
         }
         
         if (columnIndex == 4) {
-               return vendProd.getGaaQuantidade() * vendProd.getGaaPrecoUnitario();
+               return (vendProd.getGaaQuantidade() * vendProd.getGaaPrecoUnitario()) - vendProd.getGaaDesconto();
         }
         return "";
     }

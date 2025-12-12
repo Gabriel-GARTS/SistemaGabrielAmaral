@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import tools.Util;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import view.Controllers.ControllerVendasProdutos;
 /**
  *
@@ -70,6 +71,10 @@ public class JDlgVendas extends javax.swing.JDialog {
         return vendas;
     }
     
+    public JTable getjTblVendasProdutos() {
+        return jTblVendaPRodutos;
+    }
+    
     public void beanView(GaaVendas vendas) {
         jTxtCodigo.setText(Util.intToStr(vendas.getGaaIdVendas()));
         jCboClientes.setSelectedItem(vendas.getGaaClientes());
@@ -82,7 +87,31 @@ public class JDlgVendas extends javax.swing.JDialog {
         VendaProdutosDAO vendasProdutosDAO = new VendaProdutosDAO();
         List lista = (List) vendasProdutosDAO.listProdutos(vendas);
         controllerVendasProdutos.setList(lista);
-}
+        
+} public void calcularTotal() {
+        double soma = 0.0;
+
+        int colunaTotalItem = jTblVendaPRodutos.getColumnCount() - 1;
+
+        for (int i = 0; i < jTblVendaPRodutos.getRowCount(); i++) {
+            Object valorProd = jTblVendaPRodutos.getValueAt(i, colunaTotalItem);
+            double valor = 0.0;
+            if (valorProd != null) {
+                if (valorProd instanceof Number) {
+                    valor = ((Number) valorProd).doubleValue();
+                } else {
+                    valor = Util.strToDouble(valorProd.toString());
+                }
+            }
+
+            soma += valor;
+        }
+
+        jTxtTotal.setText(Util.doubleToStr(soma));
+    }
+    
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,6 +171,11 @@ public class JDlgVendas extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFmtDataPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFmtDataPagamentoActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Data da venda");
 
@@ -182,6 +216,11 @@ public class JDlgVendas extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTblVendaPRodutos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTblVendaPRodutosKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTblVendaPRodutos);
 
         jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/alterar.png"))); // NOI18N
@@ -367,7 +406,7 @@ public class JDlgVendas extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtCodigo, jFmtDataPagamento,jFmtDataVenda,jTxtMetodopag,jTxtStatus, jCboClientes, jCboVendedor, jTxtTotal ,jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
+        Util.habilitar(true, jTxtCodigo, jFmtDataPagamento,jFmtDataVenda,jTxtMetodopag,jTxtStatus, jCboClientes, jCboVendedor ,jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jFmtDataPagamento,jFmtDataVenda,jTxtMetodopag,jTxtStatus, jCboClientes, jCboVendedor, jTxtTotal);
         controllerVendasProdutos.setList(new ArrayList());
@@ -377,7 +416,7 @@ public class JDlgVendas extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-         Util.habilitar(true, jTxtCodigo, jFmtDataPagamento,jFmtDataVenda,jTxtMetodopag,jTxtStatus, jCboClientes, jCboVendedor, jTxtTotal ,jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
+         Util.habilitar(true, jTxtCodigo, jFmtDataPagamento,jFmtDataVenda,jTxtMetodopag,jTxtStatus, jCboClientes, jCboVendedor ,jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         jCboVendedor.grabFocus();
         incluir = false;
@@ -399,6 +438,7 @@ public class JDlgVendas extends javax.swing.JDialog {
             }
             vendasDAO.delete(venda);
         }
+        
         Util.limpar(jTxtCodigo, jTxtTotal, jCboClientes, jCboVendedor, jFmtDataPagamento,jFmtDataVenda,jTxtStatus,jTxtMetodopag);
         controllerVendasProdutos.setList(new ArrayList());
         
@@ -457,20 +497,31 @@ public class JDlgVendas extends javax.swing.JDialog {
          if (Util.perguntar("Deseja Excluir?") == true) {
             int rowindex = jTblVendaPRodutos.getSelectedRow();
             controllerVendasProdutos.removeBean(rowindex);
+            calcularTotal();
         }
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
     private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed
         // TODO add your handling code here:
-        JDlgVendasProdutos jDlgvendasProdutos = new JDlgVendasProdutos(null, true );
-        jDlgvendasProdutos.setVisible(true);
+        if (jTblVendaPRodutos.getSelectedRow() == -1) { 
+            Util.mensagem("Pesquise algum Produto antes de alterar!");
+            return;
+        }
+        
+        JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
+        GaaVendasProdutos vendasProdutos = controllerVendasProdutos.getBean(jTblVendaPRodutos.getSelectedRow());
+        jDlgVendasProdutos.setTelaAnterior(this, vendasProdutos);
+        jDlgVendasProdutos.setVisible(true);
+        calcularTotal();
     }//GEN-LAST:event_jBtnAlterarProdActionPerformed
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
         // TODO add your handling code here:
-        JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true );
-        jDlgVendasProdutos.setTelaAnterior(this);
+        JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
+        jDlgVendasProdutos.setTelaAnterior(this, null);
         jDlgVendasProdutos.setVisible(true);
+        
+        
         
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
 
@@ -481,6 +532,14 @@ public class JDlgVendas extends javax.swing.JDialog {
     private void jCboVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboVendedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCboVendedorActionPerformed
+
+    private void jTblVendaPRodutosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTblVendaPRodutosKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTblVendaPRodutosKeyReleased
+
+    private void jFmtDataPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtDataPagamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFmtDataPagamentoActionPerformed
 
     /**
      * @param args the command line arguments

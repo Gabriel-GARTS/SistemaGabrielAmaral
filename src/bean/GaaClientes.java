@@ -236,6 +236,18 @@ public class GaaClientes  implements java.io.Serializable {
      public String toString(){
     return this.getGaaNome();
 }
+     
+     @Override
+    public boolean equals( Object object){
+        if(object instanceof GaaClientes) {
+            GaaClientes gaaClientes = (GaaClientes)object;
+            if(this.getGaaIdClientes()== gaaClientes.getGaaIdClientes()){
+                return true;
+            }
+    }
+        return false;
+    
+    }
 
 }
 

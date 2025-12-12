@@ -77,6 +77,12 @@ public class JDlgConsultaVendas extends javax.swing.JDialog {
 
         jLabel1.setText("Vendedor");
 
+        jTxtTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtTotalActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Total Maior que ");
 
         jBtnConsulta.setText("Consultar");
@@ -171,6 +177,10 @@ public class JDlgConsultaVendas extends javax.swing.JDialog {
         }
             
     }//GEN-LAST:event_jBtnConsultaActionPerformed
+
+    private void jTxtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtTotalActionPerformed
 
     /**
      * @param args the command line arguments

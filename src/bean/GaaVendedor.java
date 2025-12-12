@@ -118,6 +118,19 @@ public class GaaVendedor  implements java.io.Serializable {
     return this.getGaaNome();
 }
 
+     
+     @Override
+    public boolean equals( Object object){
+        if(object instanceof GaaVendedor) {
+            GaaVendedor gaaVendedor = (GaaVendedor)object;
+            if(this.getGaaIdVendedor()== gaaVendedor.getGaaIdVendedor()){
+                return true;
+            }
+    }
+        return false;
+    
+    }
+
 }
 
 
